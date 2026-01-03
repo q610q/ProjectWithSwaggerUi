@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.EmployeeMapper">
+
+    <select id="getEmployeeInfo" parameterType="Employee" resultType="Employee">
+        select * from employee
+        <!-- 查询条件 -->
+        <trim prefix="WHERE" prefixOverrides="AND" >
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

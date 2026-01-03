@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.JobMapper">
+
+    <select id="mybatisSelectJob" parameterType="Map" resultType="Job">
+        select jobId, jobTitle, minSalary, maxSalary
+        from job
+        where jobId = #{jobId}
+    </select>
+
+    <select id="mybatisSelectListJob" parameterType="Job" resultType="Job">
+        select jobId, jobTitle, minSalary, maxSalary
+        from job
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="jobId != null and jobId != ''">
+                AND jobId = #{jobId}
+            </if>
+            <if test="jobTitle != null and jobTitle != ''">
+                AND jobTitle = #{jobTitle}
+            </if>
+            <if test="minSalary != null">
+                AND minSalary = #{minSalary}
+            </if>
+            <if test="maxSalary != null">
+                AND maxSalary = #{maxSalary}
+            </if>
+
+        </trim>
+
+    </select>
+
+</mapper>
